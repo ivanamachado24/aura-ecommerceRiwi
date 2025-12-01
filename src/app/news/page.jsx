@@ -1,10 +1,10 @@
+import axios from 'axios';
+
 export const dynamic = 'force-dynamic';
 
 export default async function NewsPage() {
   try {
-    const news = await fetch("https://api.example.com/news", {
-      next: { revalidate: 60 },
-    }).then((res) => res.json());
+    const { data: news } = await axios.get("https://api.example.com/news");
 
     return (
       <ul>

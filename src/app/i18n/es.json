@@ -1,0 +1,108 @@
+{
+    "nav": {
+        "brand": "Aura",
+        "subtitle": "By V.M",
+        "store": "Tienda",
+        "about": "Sobre",
+        "contact": "Contacto",
+        "cart": "Carrito",
+        "admin": "Admin",
+        "logout": "Salir",
+        "login": "Entrar"
+    },
+    "home": {
+        "hero": {
+            "title": "Bienvenida a Aura",
+            "subtitle": "Moda · Belleza · Autenticidad — Encuentra tu estilo: Elegante, Gótico o Coquette",
+            "exploreCollections": "Explorar colecciones",
+            "exploreStyle": "Explora tu estilo"
+        },
+        "newCollections": {
+            "title": "Nuevas colecciones",
+            "viewCollection": "Ver colección",
+            "look2": "Look 2",
+            "look3": "Look 3"
+        },
+        "styles": {
+            "title": "Explora tu estilo",
+            "elegant": "Elegante",
+            "gothic": "Gótico",
+            "coquette": "Coquette"
+        }
+    },
+    "about": {
+        "title": "Sobre Aura",
+        "intro": "Bienvenida a <strong>Aura – By V.M</strong>, tu destino de moda donde la autenticidad se encuentra con el estilo.",
+        "mission": "Nuestra misión es empoderar a través de la moda, ofreciendo colecciones que van desde lo <strong>Elegante</strong> y sofisticado, pasando por lo misterioso del estilo <strong>Gótico</strong>, hasta la dulzura del <strong>Coquette</strong>.",
+        "story": "Creemos que cada prenda cuenta una historia, y queremos ser parte de la tuya."
+    },
+    "contact": {
+        "title": "Contáctanos",
+        "successMessage": "¡Gracias por tu mensaje! Te responderemos pronto.",
+        "form": {
+            "name": "Nombre",
+            "email": "Email",
+            "message": "Mensaje",
+            "submit": "Enviar mensaje"
+        }
+    },
+    "products": {
+        "title": "Tienda",
+        "filters": {
+            "allCategories": "Todas",
+            "allStyles": "Todos los estilos",
+            "categories": {
+                "dresses": "Vestidos",
+                "croptops": "Croptops",
+                "jeans": "Jeans",
+                "sets": "Conjuntos",
+                "skirts": "Faldas",
+                "accessories": "Accesorios"
+            },
+            "styles": {
+                "elegant": "Elegante",
+                "gothic": "Gótico",
+                "coquette": "Coquette"
+            }
+        }
+    },
+    "cart": {
+        "title": "Tu carrito",
+        "empty": "Carrito vacío.",
+        "goToStore": "Ir a la tienda",
+        "size": "Talla",
+        "remove": "Eliminar",
+        "total": "Total",
+        "checkout": "Comprar"
+    },
+    "login": {
+        "title": "Entrar",
+        "email": "Email",
+        "password": "Contraseña",
+        "submit": "Entrar",
+        "invalidCredentials": "Credenciales inválidas"
+    },
+    "admin": {
+        "title": "Panel Admin",
+        "products": "Productos",
+        "lowStock": "Stock bajo",
+        "manageProducts": "Gestionar productos",
+        "lowStockProducts": "Productos con bajo stock"
+    },
+    "common": {
+        "loading": "Cargando...",
+        "error": "Error",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "add": "Agregar",
+        "search": "Buscar",
+        "filter": "Filtrar",
+        "sort": "Ordenar",
+        "price": "Precio",
+        "stock": "Stock",
+        "available": "Disponible",
+        "outOfStock": "Agotado"
+    }
+}

@@ -17,6 +17,7 @@
     "cypress:test:open": "start-server-and-test dev 3000 cypress:open"
   },
   "dependencies": {
+    "@types/nodemailer": "^7.0.4",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.4.0",
@@ -25,10 +26,12 @@
     "mongodb": "^6.6.2",
     "mongoose": "^7.3.1",
     "next-auth": "^4.22.1",
+    "nodemailer": "^7.0.11",
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.1",
+    "react-toastify": "^11.0.5",
     "yup": "^1.7.1",
     "zustand": "^4.4.0"
   },

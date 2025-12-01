@@ -1,0 +1,108 @@
+{
+    "nav": {
+        "brand": "Aura",
+        "subtitle": "By V.M",
+        "store": "Store",
+        "about": "About",
+        "contact": "Contact",
+        "cart": "Cart",
+        "admin": "Admin",
+        "logout": "Logout",
+        "login": "Login"
+    },
+    "home": {
+        "hero": {
+            "title": "Welcome to Aura",
+            "subtitle": "Fashion · Beauty · Authenticity — Find your style: Elegant, Gothic or Coquette",
+            "exploreCollections": "Explore collections",
+            "exploreStyle": "Explore your style"
+        },
+        "newCollections": {
+            "title": "New collections",
+            "viewCollection": "View collection",
+            "look2": "Look 2",
+            "look3": "Look 3"
+        },
+        "styles": {
+            "title": "Explore your style",
+            "elegant": "Elegant",
+            "gothic": "Gothic",
+            "coquette": "Coquette"
+        }
+    },
+    "about": {
+        "title": "About Aura",
+        "intro": "Welcome to <strong>Aura – By V.M</strong>, your fashion destination where authenticity meets style.",
+        "mission": "Our mission is to empower through fashion, offering collections ranging from <strong>Elegant</strong> and sophisticated, through the mysterious <strong>Gothic</strong> style, to the sweetness of <strong>Coquette</strong>.",
+        "story": "We believe that every garment tells a story, and we want to be part of yours."
+    },
+    "contact": {
+        "title": "Contact Us",
+        "successMessage": "Thank you for your message! We'll respond soon.",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "message": "Message",
+            "submit": "Send message"
+        }
+    },
+    "products": {
+        "title": "Store",
+        "filters": {
+            "allCategories": "All",
+            "allStyles": "All styles",
+            "categories": {
+                "dresses": "Dresses",
+                "croptops": "Crop Tops",
+                "jeans": "Jeans",
+                "sets": "Sets",
+                "skirts": "Skirts",
+                "accessories": "Accessories"
+            },
+            "styles": {
+                "elegant": "Elegant",
+                "gothic": "Gothic",
+                "coquette": "Coquette"
+            }
+        }
+    },
+    "cart": {
+        "title": "Your cart",
+        "empty": "Cart is empty.",
+        "goToStore": "Go to store",
+        "size": "Size",
+        "remove": "Remove",
+        "total": "Total",
+        "checkout": "Checkout"
+    },
+    "login": {
+        "title": "Login",
+        "email": "Email",
+        "password": "Password",
+        "submit": "Login",
+        "invalidCredentials": "Invalid credentials"
+    },
+    "admin": {
+        "title": "Admin Panel",
+        "products": "Products",
+        "lowStock": "Low stock",
+        "manageProducts": "Manage products",
+        "lowStockProducts": "Low stock products"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "search": "Search",
+        "filter": "Filter",
+        "sort": "Sort",
+        "price": "Price",
+        "stock": "Stock",
+        "available": "Available",
+        "outOfStock": "Out of stock"
+    }
+}

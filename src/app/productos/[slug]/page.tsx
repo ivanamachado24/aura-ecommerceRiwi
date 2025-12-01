@@ -1,11 +1,16 @@
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import axios from 'axios';
+import { notFound } from 'next/navigation';
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const res = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/products/${slug}`);
-  if (!res.ok) notFound();
-  const product = await res.json();
+  let product;
+  try {
+    const res = await axios.get(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/products/${slug}`);
+    product = res.data;
+  } catch (error) {
+    notFound();
+  }
 
 
   return (

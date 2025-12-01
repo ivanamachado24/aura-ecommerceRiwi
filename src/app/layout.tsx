@@ -1,7 +1,9 @@
 import '@/styles/globals.css'
+import 'react-toastify/dist/ReactToastify.css';
 import { ReactNode } from 'react'
 import Nav from '@/components/Nav'
 import Providers from '@/components/Providers'
+import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
   title: 'Aura – By V.M',
@@ -17,6 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <main className="max-w-6xl mx-auto px-4 py-6">
             {children}
           </main>
+          <ToastContainer position="bottom-right" />
         </Providers>
       </body>
     </html>
