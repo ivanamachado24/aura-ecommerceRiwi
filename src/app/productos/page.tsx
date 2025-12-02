@@ -98,37 +98,64 @@ function ProductContent() {
               <Link
                 key={p._id}
                 href={`/productos/${slug}`}
-                className="group bg-white rounded-2xl shadow-md overflow-hidden card-hover animate-scale-in"
+                className="group relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 animate-scale-in"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className="relative w-full h-64 bg-gradient-to-br from-purple-50 to-pink-50 overflow-hidden">
+                {/* Image Container */}
+                <div className="relative w-full aspect-[3/4] overflow-hidden bg-gray-100">
                   <Image
                     src={p.images?.[0] || p.image || '/logo.png'}
                     alt={p.name}
                     fill
-                    style={{ objectFit: 'cover' }}
-                    className="group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  {p.stock <= 3 && p.stock > 0 && (
-                    <div className="absolute top-3 right-3 bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      ¡Últimas unidades!
-                    </div>
-                  )}
-                  {p.stock === 0 && (
-                    <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                      Agotado
-                    </div>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors">{p.name}</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-purple-600">${p.price?.toFixed(2)}</span>
+
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {/* Quick Action Button */}
+                  <div className="absolute bottom-4 left-0 right-0 flex justify-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 px-4">
+                    <span className="w-full py-3 bg-white/90 backdrop-blur-sm text-gray-900 text-center text-sm font-semibold rounded-xl hover:bg-white transition-colors shadow-lg">
+                      Ver Detalles
+                    </span>
+                  </div>
+
+                  {/* Badges */}
+                  <div className="absolute top-3 left-3 flex flex-col gap-2">
+                    {p.stock <= 3 && p.stock > 0 && (
+                      <span className="px-3 py-1 bg-orange-500/90 backdrop-blur-sm text-white text-xs font-bold rounded-full shadow-sm">
+                        ¡Últimas unidades!
+                      </span>
+                    )}
+                    {p.stock === 0 && (
+                      <span className="px-3 py-1 bg-red-500/90 backdrop-blur-sm text-white text-xs font-bold rounded-full shadow-sm">
+                        Agotado
+                      </span>
+                    )}
                     {p.style && (
-                      <span className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded-full font-medium">
+                      <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-purple-900 text-xs font-bold rounded-full shadow-sm">
                         {p.style}
                       </span>
                     )}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5">
+                  <div className="mb-2">
+                    <h3 className="font-serif text-lg text-gray-900 line-clamp-1 group-hover:text-purple-700 transition-colors">
+                      {p.name}
+                    </h3>
+                    <p className="text-sm text-gray-500 capitalize">{p.category}</p>
+                  </div>
+
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-xl font-bold text-gray-900">
+                      ${p.price?.toLocaleString('es-CO')}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center group-hover:bg-purple-100 transition-colors">
+                      <Search className="w-4 h-4 text-purple-600" />
+                    </div>
                   </div>
                 </div>
               </Link>

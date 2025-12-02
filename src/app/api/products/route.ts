@@ -51,60 +51,126 @@ import cloudinary from '@/lib/cloudinary';
 
 export async function POST(request: Request) {
   try {
+    console.log('=== POST /api/products - Starting ===');
     const formData = await request.formData();
-    const name = formData.get('title') as string; // Frontend sends 'title' but model uses 'name'
+
+    // Extract all fields from FormData
+    const name = formData.get('name') as string;
+    const slug = formData.get('slug') as string;
     const description = formData.get('description') as string;
+    const price = parseFloat(formData.get('price') as string);
     const category = formData.get('category') as string;
-    const imageFile = formData.get('image') as File;
+    const style = formData.get('style') as string;
+    const stock = parseInt(formData.get('stock') as string);
+    const sizesString = formData.get('sizes') as string;
+    const sizes = sizesString ? sizesString.split(',').map(s => s.trim()) : [];
 
-    let imageUrl = '';
+    console.log('Form data extracted:', { name, slug, price, category, style, stock, sizes });
 
-    if (imageFile) {
-      const arrayBuffer = await imageFile.arrayBuffer();
-      const buffer = Buffer.from(arrayBuffer);
+    // Handle multiple images
+    const imageUrls: string[] = [];
+    const imageFiles = formData.getAll('images') as File[];
 
-      // Upload to Cloudinary
-      const result: any = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          { folder: 'aura-products' },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        ).end(buffer);
-      });
+    console.log('Number of image files:', imageFiles.length);
 
-      imageUrl = result.secure_url;
-    }
-
-    const body = {
-      name,
-      description,
-      category,
-      price: 0, // Default or add field in form
-      stock: 0, // Default or add field in form
-      images: imageUrl ? [imageUrl] : [],
-      active: true
-    };
-
-    // Validar datos con Yup
-    try {
-      // Note: validation might fail if price/stock are required but missing in form
-      // await productSchema.validate(body, { abortEarly: false });
-    } catch (validationError: any) {
+    if (!imageFiles || imageFiles.length === 0) {
+      console.error('No images provided');
       return NextResponse.json(
-        { message: 'Datos inválidos', errors: validationError.errors },
+        { error: 'Debe subir al menos una imagen' },
         { status: 400 }
       );
     }
 
+    // Upload images to Cloudinary
+    console.log('Starting Cloudinary upload...');
+    console.log('Cloudinary Config:', {
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY ? '***' + process.env.CLOUDINARY_API_KEY.slice(-4) : 'undefined',
+      api_secret: process.env.CLOUDINARY_API_SECRET ? '***' : 'undefined'
+    });
+
+    for (const imageFile of imageFiles) {
+      if (imageFile && imageFile.size > 0) {
+        console.log(`Uploading image: ${imageFile.name}, size: ${imageFile.size}`);
+        const arrayBuffer = await imageFile.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        // Upload to Cloudinary
+        const result: any = await new Promise((resolve, reject) => {
+          cloudinary.uploader.upload_stream(
+            {
+              folder: 'aura-products',
+              transformation: [
+                { width: 1000, height: 1000, crop: 'limit' },
+                { quality: 'auto' }
+              ]
+            },
+            (error, result) => {
+              if (error) {
+                console.error('Cloudinary upload error:', error);
+                reject(error);
+              } else {
+                console.log('Cloudinary upload success:', result?.secure_url);
+                resolve(result);
+              }
+            }
+          ).end(buffer);
+        });
+
+        imageUrls.push(result.secure_url);
+      }
+    }
+
+    const body = {
+      name,
+      slug,
+      description: description || '', // Allow empty description
+      price,
+      category,
+      style,
+      sizes,
+      stock,
+      images: imageUrls,
+      active: true
+    };
+
+    console.log('Product data to validate:', body);
+
+    // Validate data with Yup
+    try {
+      await productSchema.validate(body, { abortEarly: false });
+      console.log('Validation passed');
+    } catch (validationError: any) {
+      console.error('Validation error:', validationError.errors || validationError.message);
+      return NextResponse.json(
+        { error: 'Datos inválidos', details: validationError.errors || validationError.message },
+        { status: 400 }
+      );
+    }
+
+    console.log('Connecting to MongoDB...');
     await connectMongoose();
+
+    console.log('Creating product in database...');
     const product = await Product.create(body);
+    console.log('Product created successfully:', product._id);
+
     return NextResponse.json(product, { status: 201 });
-  } catch (error) {
-    console.error('Error creating product:', error);
+  } catch (error: any) {
+    console.error('=== Error creating product ===');
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+
+    if (error.name === 'ValidationError') {
+      return NextResponse.json(
+        { error: 'Datos inválidos', details: error.errors },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { error: 'Error al crear producto' },
+      { error: 'Error al crear producto', details: error.message || 'Unknown error' },
       { status: 500 }
     );
   }

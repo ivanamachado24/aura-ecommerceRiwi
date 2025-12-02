@@ -19,12 +19,15 @@ export const contactSchema = yup.object({
 
 export const productSchema = yup.object({
     name: yup.string().required('El nombre del producto es obligatorio'),
-    description: yup.string().required('La descripción es obligatoria'),
+    slug: yup.string().required('El slug es obligatorio'),
+    description: yup.string().optional(), // Description is optional
     price: yup.number().required('El precio es obligatorio').positive('El precio debe ser positivo'),
     category: yup.string().required('La categoría es obligatoria').oneOf(['vestidos', 'croptops', 'jeans', 'conjuntos', 'faldas', 'accesorios'], 'Categoría no válida'),
     style: yup.string().required('El estilo es obligatorio').oneOf(['Elegante', 'Gótico', 'Coquette'], 'Estilo no válido'),
+    sizes: yup.array().of(yup.string()).min(1, 'Debe haber al menos una talla'),
     stock: yup.number().integer('El stock debe ser un número entero').min(0, 'El stock no puede ser negativo').default(0),
     images: yup.array().of(yup.string().url('Debe ser una URL válida')).min(1, 'Debe haber al menos una imagen'),
+    active: yup.boolean().default(true),
 });
 
 export const productFormSchema = yup.object({
