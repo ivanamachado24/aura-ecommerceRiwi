@@ -19,7 +19,7 @@ npm install
 ```bash
 npm run seed
 ```
-Admin: `vanessa@aura.com` / `admin1234`
+Admin: `vanessa@aura.com` / `admin123`
 
 4. Inicia en modo desarrollo:
 ```bash
